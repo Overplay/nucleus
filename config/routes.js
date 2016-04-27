@@ -62,6 +62,8 @@ module.exports.routes = {
   
   '/resetpwd': 'AuthController.resetPwd',
   
-  '/ui': "UIController.uiApp"
+  '/ui': "UIController.uiApp",
+
+  '/validated' : 'AuthController.validatedOk'
   
 };

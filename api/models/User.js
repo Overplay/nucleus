@@ -73,10 +73,7 @@ module.exports = {
 
         // User is blocked until they validate thru email or text
         // For now, not implemented
-        blocked: {
-            type:       'boolean',
-            defaultsTo: false
-        },
+        
 
         // Array of ids of roles. Not a collection because we don't want all the relation stuff slowing us 
         // down.

@@ -71,7 +71,7 @@ module.exports = require( 'waterlock' ).waterlocked( {
                 return res.forbidden();
             }
 
-            AdminService.changePwd( { resetToken: params.resetToken, password: params.newpass })
+            AdminService.changePwd( { resetToken: params.resetToken, password: params.newpass } )
                 .then( function () {
                     return res.json( { "message": "Password changed" } );
                 } )
@@ -127,6 +127,16 @@ module.exports = require( 'waterlock' ).waterlocked( {
 
         return res.view( 'users/resetPassword' );
 
+    },
+
+    validatedOk: function ( req, res ) {
+
+        var themeExt = '';
+        if ( sails.config.theme && sails.config.theme.themeName ) {
+            themeExt = themeExt + '-' + sails.config.theme.themeName;
+        }
+
+        return res.view( 'users/validationOk' + themeExt );
     }
 
 

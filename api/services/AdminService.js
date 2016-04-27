@@ -94,7 +94,7 @@ module.exports = require( 'waterlock' ).waterlocked( {
      */
      
      // TODO: This should do a check before attempting create to keep the log noise level down :)
-    addUser: function ( emailAddr, password, userObj ) {
+    addUser: function ( emailAddr, password, userObj, requireValidation ) {
 
         return new Promise( function ( resolve, reject ) {
 
@@ -102,6 +102,8 @@ module.exports = require( 'waterlock' ).waterlocked( {
                 email:    emailAddr,
                 password: password
             };
+
+            requireValidation = requireValidation || sails.config.waterlock.alwaysValidate;
 
             User.create( userObj || {} )
                 .then( function ( user ) {
@@ -112,6 +114,23 @@ module.exports = require( 'waterlock' ).waterlocked( {
                             sails.log.error( err );
                             reject( err );
                         } else {
+                            if (requireValidation){
+                                
+                                ValidateToken.create( { owner: userWithAuth.auth.id } )
+                                    .then( function ( tok ) {
+                                        sails.log.info( tok );
+                                        Auth.update( { id: tok.owner }, { validateToken: tok, blocked: true } )
+                                            .then( function ( data ) {
+                                                sails.log.debug( "Back attach of validateToken OK" );
+                                            } )
+                                    } )
+                                    .catch( function ( err ) {
+                                        sails.log.error( err );
+                                    } );
+                            
+                            
+                            }
+                            
                             resolve( userWithAuth );
                         }
                     } )

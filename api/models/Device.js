@@ -57,8 +57,7 @@ module.exports = {
             defaultsTo: ''
         
         },
-
-
+        
         // for now, can only be owned by one proprietor.owner
         deviceOwner: {
             model: 'User'
