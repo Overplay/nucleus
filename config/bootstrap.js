@@ -68,30 +68,6 @@ module.exports.bootstrap = function ( cb ) {
 
     // It's very important to trigger this callback method when you are finished
     // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
-
-    // Set email creds
-    // TODO: This is here because just overriding the waterlock stuff in config folder via locals was not
-    // working. This code is brittle and shitty. I don't like the way the email stuff is tightly tied to
-    // the auth anyway in Waterlock and I will probably change this.
     
-    try {
-        var emailService = sails.config.creds.email.service;
-        var emailPass = sails.config.creds.email.pass;
-        var emailUser = sails.config.creds.email.user;
-
-        var mailOptions = sails.config.waterlock.authMethod[ 0 ].passwordReset.mail.options;
-        mailOptions.service = emailService;
-        mailOptions.auth.user = emailUser;
-        mailOptions.auth.pass = emailPass;
-
-    } catch(err){
-        
-        sails.log.error("Something bad happened fixing up the Waterlock email creds! You should fix this!");
-        sails.log.error(err);
-
-    }
-    
-
-
     cb();
 };

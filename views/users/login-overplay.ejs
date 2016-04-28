@@ -101,41 +101,48 @@
 
 </style>
 
-<img style="margin: 10px auto; display: block; max-width: 50vw;" src="/images/overplay-white.png"/>
 
-<div class="container-fluid" ng-app="loginApp" ng-controller="loginController">
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-            <h1>Please Log In</h1>
+<div style="background: url(/images/hourglass-nebula.jpg); height: 100vh;">
 
-            <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
-            <input style="display:none" type="text" name="fakeusernameremembered"/>
-            <input style="display:none" type="password" name="fakepasswordremembered"/>
+    <img style="margin: 10px auto; display: block; max-width: 50vw;" src="/images/overplay-white.png"/>
 
-            <div class="input-group input-group-lg">
-                <span class="input-group-addon">Email</span>
+    <div class="container-fluid" ng-app="loginApp" ng-controller="loginController">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2" style="background: rgba(1,1,1,0.5); padding: 30px;">
+                <h1>Please Log In</h1>
 
-                <input type="text" class="form-control" placeholder="Email"
-                       ng-model="user.email">
+                <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
+                <input style="display:none" type="text" name="fakeusernameremembered"/>
+                <input style="display:none" type="password" name="fakepasswordremembered"/>
 
-            </div>
-            <div class="input-group input-group-lg top15">
-                <span class="input-group-addon">Password</span>
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon"><li class="glyphicon-envelope glyphicon"></li></span>
 
-                <input type="password" class="form-control" placeholder="Password"
-                       ng-model="user.password">
-            </div>
+                    <input type="text" class="form-control" placeholder="Email"
+                           ng-model="user.email">
+
+                </div>
+                <div class="input-group input-group-lg top15">
+                    <span class="input-group-addon"><li class="glyphicon glyphicon-lock"></li></span>
+
+                    <input type="password" class="form-control" placeholder="Password"
+                           ng-model="user.password">
+                </div>
 
 
-            <button ng-click="login()" class="btn btn-primary btn-lg top15">Go</button>&nbsp;
-            <button ng-click="forgot()" class="btn btn-warn btn-lg top15">I Forgot!</button>
+                <button ng-click="login()" class="btn btn-primary btn-lg top15">Go</button>
+                &nbsp;
+                <button ng-click="forgot()" class="btn btn-warn btn-lg top15">I Forgot!</button>
 
-            <div class="alertbubble" ng-show="ui.errorMessage">
-                {{ ui.errorMessage }}
+                <div class="alertbubble" ng-show="ui.errorMessage">
+                    {{ ui.errorMessage }}
+                </div>
             </div>
         </div>
     </div>
+
 </div>
+
 
 <script src="/js/nucleusService/nucleusService.js"></script>
 <script src="/js/views/users/loginapp.js"></script>
